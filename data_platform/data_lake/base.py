@@ -25,7 +25,7 @@ class BaseDataLakeBucket(s3.Bucket):
                 scope,
                 id=self.obj_name,
                 bucket_name=self.obj_name,
-                block_public_access=self.default_block_public_access,
+                block_public_access=s3.BlockPublicAccess.BLOCK_ALL,
                 encryption=self.default_encryption,
                 versioned=True,
                 **kwargs
