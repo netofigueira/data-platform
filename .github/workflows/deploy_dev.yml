@@ -33,4 +33,5 @@ jobs:
         AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
         ENVIRONMENT: DEVELOP
       run: |
+        cdk bootstrap
         cdk deploy "*" --require-approval never                                                               
