@@ -1,5 +1,6 @@
 from enum import Enum
-from aws_cdk import core
+from constructs import Construct
+from aws_cdk import Duration
 from aws_cdk import (aws_s3 as s3, )
 
 
@@ -14,7 +15,7 @@ class DataLakeLayer(Enum):
 
 
 class BaseDataLakeBucket(s3.Bucket):
-    def __init__(self, scope: core.Construct, deploy_env:Environment, layer: DataLakeLayer, **kwargs):
+    def __init__(self, scope: Construct, deploy_env:Environment, layer: DataLakeLayer, **kwargs):
 
         self.layer = layer
         self.deploy_env = deploy_env
@@ -50,7 +51,7 @@ class BaseDataLakeBucket(s3.Bucket):
         def set_default_lifecycle_rules(self):
 
             self.add_lifecycle_rule(
-                    abort_incomplete_multipart_upload_after=core.Duration.days(7),
+                    abort_incomplete_multipart_upload_after=Duration.days(7),
                     enabled=True
 
                     )
@@ -59,17 +60,17 @@ class BaseDataLakeBucket(s3.Bucket):
                     noncurrent_version_transitions=[
                         s3.NoncurrentVersionTransition(
                             storage_class=s3.StorageClass.INFREQUENT_ACCESS,
-                            transition_after=core.Duration.days(30)
+                            transition_after=Duration.days(30)
                             ),
                         s3.NoncurrentVersionTransition(
                             storage_class=s3.StorageClass.GLACIER,
-                        transition_after=core.Dutarion.days(60)
+                        transition_after=Dutarion.days(60)
                         )
                     ]
                 )
 
             self.add_lifecycle_rule(
-                    noncurrent_version_expiration=core.Duration.days(360)
+                    noncurrent_version_expiration=Duration.days(360)
                     )
 
 
