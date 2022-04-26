@@ -14,7 +14,7 @@ class DataLakeLayer(Enum):
 
 
 class BaseDataLakeBucket(s3.Bucket):
-    def __init__(self, scope, core.Construct, deploy_env:Environment, layer: DataLakeLayer, **kwargs):
+    def __init__(self, scope: core.Construct, deploy_env:Environment, layer: DataLakeLayer, **kwargs):
 
         self.layer = layer
         self.deploy_env = deploy_env
