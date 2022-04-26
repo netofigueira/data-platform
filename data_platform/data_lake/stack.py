@@ -2,13 +2,13 @@ from data_platform.data_lake.base import BaseDataLakeBucket, DataLakeLayer
 from aws_cdk import Stack, Duration
 from constructs import Construct
 from aws_cdk import (aws_s3 as s3, )
-from data_platform import active_environment
+from data_platform.active_environment import active_environment
 
 
 class DataLakeStack(Stack):
     def __init__(self, scope: Construct, **kwargs) -> None:
         self.deploy_env = active_environment
-        super().__init__(scope, id=f'{self.deploy_env.value}-data-lake-stack', **kwargs)
+        super().__init__(scope, id=f"{self.deploy_env.value}-data-lake-stack", **kwargs)
 
         self.data_lake_raw_bucket = BaseDataLakeBucket(
             self,
