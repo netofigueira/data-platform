@@ -26,7 +26,7 @@ class BaseDataLakeBucket(s3.Bucket):
                 id=self.obj_name,
                 bucket_name=self.obj_name,
                 block_public_access=s3.BlockPublicAccess.BLOCK_ALL,
-                encryption=self.default_encryption,
+                encryption=s3.BucketEncryption.S3_MANAGED,
                 versioned=True,
                 **kwargs
 
